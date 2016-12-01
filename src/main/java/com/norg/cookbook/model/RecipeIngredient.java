@@ -1,9 +1,6 @@
 package com.norg.cookbook.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -17,6 +14,15 @@ public class RecipeIngredient {
     private BigDecimal quantity;
     private String unit;
 
+    public RecipeIngredient() {
+    }
+
+    public RecipeIngredient(Ingredient ingredient, BigDecimal quantity, String unit) {
+        this.ingredient = ingredient;
+        this.quantity = quantity;
+        this.unit = unit;
+    }
+
     @Id
     @GeneratedValue
     public Integer getId() {
@@ -27,7 +33,8 @@ public class RecipeIngredient {
         this.id = id;
     }
 
-    @ManyToOne
+//    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     public Recipe getRecipe() {
         return recipe;
     }
@@ -36,7 +43,8 @@ public class RecipeIngredient {
         this.recipe = recipe;
     }
 
-    @ManyToOne
+//    @ManyToOne (cascade = {CascadeType.ALL})
+    @ManyToOne ()
     public Ingredient getIngredient() {
         return ingredient;
     }

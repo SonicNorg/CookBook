@@ -1,23 +1,41 @@
 package com.norg.cookbook.model;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Рецепт. Методы синхронизированы, потому что по задумке один рецепт не могут менять одновременно несколько пользователей.
  */
 @Entity
 public class Recipe {
-    @Id
-    @GeneratedValue
     private Integer id;
-
-    @Transient
-    private Map<Ingredient, Float> ingredients = new HashMap<Ingredient, Float>();
-
     private String name;
     private String description;
+    private List<RecipeIngredient> ingredients;
+    //TODO date, author, etc.
+
+    public Recipe() {
+    }
+
+    public Recipe(String name) {
+        this.name = name;
+    }
+
+    public Recipe(Integer id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    @Id
+    @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
+
+    public synchronized void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -25,14 +43,6 @@ public class Recipe {
 
     public synchronized void setName(String name) {
         this.name = name;
-    }
-
-    public synchronized void addIngredient(Ingredient ingredient, Float amount) {
-        ingredients.put(ingredient, amount);
-    }
-
-    public synchronized void removeIngredient(Ingredient ingredient) {
-        ingredients.remove(ingredient);
     }
 
     public synchronized String getDescription() {
@@ -43,28 +53,32 @@ public class Recipe {
         this.description = description;
     }
 
-    public Recipe(Integer id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-
-    public Recipe(String name) {
-        this.name = name;
-    }
-
-    public Recipe() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Map<Ingredient, Float> getIngredients() {
+    //с ленивой загрузкой не проходил тест (валился при попытке вывести рецепт на экран), еще не разбирался, почему
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+//    @OneToMany(fetch = FetchType.EAGER)
+    public List<RecipeIngredient> getIngredients() {
         return ingredients;
     }
+
+    public void setIngredients(List<RecipeIngredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", ingredients=" + ingredients +
+                '}';
+    }
+
+    //    public synchronized void addIngredient(Ingredient ingredient, Float amount) {
+//        ingredients.put(ingredient, amount);
+//    }
+//
+//    public synchronized void removeIngredient(Ingredient ingredient) {
+//        ingredients.remove(ingredient);
+//    }
 }
