@@ -1,7 +1,8 @@
 package com.norg.cookbook.service;
 
-import com.norg.cookbook.dao.IngredientDao;
-import com.norg.cookbook.dao.RecipeDao;
+import com.norg.cookbook.model.Recipe;
+import com.norg.cookbook.repository.IngredientRepository;
+import com.norg.cookbook.repository.RecipeRepository;
 import com.norg.cookbook.model.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,26 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class CookBook {
+    private IngredientRepository ingredientRepository;
+    private RecipeRepository recipeRepository;
+
     @Autowired
-    private IngredientDao ingredientDao;
+    public void setIngredientRepository(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
+    }
+
     @Autowired
-    private RecipeDao recipeDao;
+    public void setRecipeRepository(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
 
     @Transactional
     public void addIngredient(Ingredient ingredient) {
-        ingredientDao.add(ingredient);
+        ingredientRepository.save(ingredient);
+    }
+
+    @Transactional
+    public void addRecipe(Recipe recipe) {
+
     }
 }

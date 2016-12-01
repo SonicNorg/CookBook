@@ -1,37 +1,53 @@
 package com.norg.cookbook.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Сущность ингредиента
  */
+@Entity
 public class Ingredient {
-    private int id;
-    private final String name;
-    private final String unit;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
-    public Ingredient(String name, String unit) {
-        this.name = name;
-        this.unit = unit;
+    private String name;
+
+    public Ingredient() {
     }
 
-    public Ingredient(int id, String name, String unit) {
+    public Ingredient(String name) {
+        this.name = name;
+    }
+
+    public Ingredient(Integer id, String name) {
         this.id = id;
         this.name = name;
-        this.unit = unit;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getUnit() {
-        return unit;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

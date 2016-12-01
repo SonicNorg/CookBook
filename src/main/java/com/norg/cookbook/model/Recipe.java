@@ -1,14 +1,21 @@
 package com.norg.cookbook.model;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Рецепт. Методы синхронизированы, потому что по задумке один рецепт не могут менять одновременно несколько пользователей.
  */
+@Entity
 public class Recipe {
-    private int id;
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @Transient
     private Map<Ingredient, Float> ingredients = new HashMap<Ingredient, Float>();
+
     private String name;
     private String description;
 
@@ -36,7 +43,7 @@ public class Recipe {
         this.description = description;
     }
 
-    public Recipe(int id, String name, String description) {
+    public Recipe(Integer id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -49,11 +56,11 @@ public class Recipe {
     public Recipe() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

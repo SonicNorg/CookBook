@@ -2,36 +2,31 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <!-- Scans within the base package of the application for @Component classes to configure as beans -->
     <!--<context:component-scan base-package="org.springframework.docs.test" />-->
 
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:default"/>
-        <property name="username" value=""/>
-        <property name="password" value=""/>
-    </bean>
-
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="lazyInit" value="false"/>
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
     <context:annotation-config/>
+    <jpa:repositories base-package="com.norg.cookbook.repository"/>
+    <context:component-scan base-package="com.norg.cookbook.service"/>
 
-    <jdbc:initialize-database data-source="dataSource" enabled="true">
-        <jdbc:script location="classpath:sql/db-create.sql"/>
-    </jdbc:initialize-database>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="hibernatePersistence"/>
+    </bean>
 
-    <bean id="ingredientDao" class="com.norg.cookbook.dao.IngredientDaoH2"/>
-    <bean id="recipeDao" class="com.norg.cookbook.dao.RecipeDaoH2"/>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <!--<bean id="ingredientDao" class="com.norg.cookbook.dao.IngredientDaoH2"/>-->
+    <!--<bean id="recipeDao" class="com.norg.cookbook.dao.RecipeDaoH2"/>-->
 
 
 </beans>
