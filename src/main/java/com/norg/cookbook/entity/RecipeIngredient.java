@@ -43,8 +43,8 @@ public class RecipeIngredient {
         this.recipe = recipe;
     }
 
-    @ManyToOne (cascade = {CascadeType.ALL})
-//    @ManyToOne
+//    @ManyToOne (cascade = {CascadeType.ALL})
+    @ManyToOne
     public Ingredient getIngredient() {
         return ingredient;
     }
