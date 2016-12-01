@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 /**
  * Запись "Ингредиент рецепта", для хранения элемента в рецепте с количеством и единицей измерения
  */
-@Entity
+@Entity(name = "recipe_ingredient")
 public class RecipeIngredient {
     private Integer id;
     private Recipe recipe;
