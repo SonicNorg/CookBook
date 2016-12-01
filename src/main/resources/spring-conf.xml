@@ -2,13 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/data/jpa
-        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Scans within the base package of the application for @Component classes to configure as beans -->
     <!--<context:component-scan base-package="org.springframework.docs.test" />-->
@@ -16,6 +16,11 @@
     <context:annotation-config/>
     <jpa:repositories base-package="com.norg.cookbook.repository"/>
     <context:component-scan base-package="com.norg.cookbook.service"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="hibernatePersistence"/>
@@ -25,8 +30,9 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
+
     <!--<bean id="ingredientDao" class="com.norg.cookbook.dao.IngredientDaoH2"/>-->
     <!--<bean id="recipeDao" class="com.norg.cookbook.dao.RecipeDaoH2"/>-->
 
-
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
