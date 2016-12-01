@@ -1,9 +1,9 @@
 package com.norg.cookbook.service;
 
-import com.norg.cookbook.model.Recipe;
+import com.norg.cookbook.entity.Recipe;
 import com.norg.cookbook.repository.IngredientRepository;
 import com.norg.cookbook.repository.RecipeRepository;
-import com.norg.cookbook.model.Ingredient;
+import com.norg.cookbook.entity.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

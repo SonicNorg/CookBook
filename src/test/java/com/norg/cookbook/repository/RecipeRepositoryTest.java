@@ -1,8 +1,8 @@
 package com.norg.cookbook.repository;
 
-import com.norg.cookbook.model.Ingredient;
-import com.norg.cookbook.model.Recipe;
-import com.norg.cookbook.model.RecipeIngredient;
+import com.norg.cookbook.entity.Ingredient;
+import com.norg.cookbook.entity.Recipe;
+import com.norg.cookbook.entity.RecipeIngredient;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;

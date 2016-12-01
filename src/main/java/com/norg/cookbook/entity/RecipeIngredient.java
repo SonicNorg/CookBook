@@ -1,4 +1,4 @@
-package com.norg.cookbook.model;
+package com.norg.cookbook.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -34,7 +34,7 @@ public class RecipeIngredient {
     }
 
 //    @ManyToOne(cascade = {CascadeType.ALL})
-    @ManyToOne()
+    @ManyToOne
     public Recipe getRecipe() {
         return recipe;
     }
@@ -43,8 +43,8 @@ public class RecipeIngredient {
         this.recipe = recipe;
     }
 
-//    @ManyToOne (cascade = {CascadeType.ALL})
-    @ManyToOne ()
+    @ManyToOne (cascade = {CascadeType.ALL})
+//    @ManyToOne
     public Ingredient getIngredient() {
         return ingredient;
     }

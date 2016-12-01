@@ -1,6 +1,6 @@
 package com.norg.cookbook.repository;
 
-import com.norg.cookbook.model.Recipe;
+import com.norg.cookbook.entity.Recipe;
 import org.springframework.data.repository.CrudRepository;
 
 /**

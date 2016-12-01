@@ -1,4 +1,4 @@
-package com.norg.cookbook.model;
+package com.norg.cookbook.entity;
 
 import javax.persistence.*;
 import java.util.List;

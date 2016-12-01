@@ -1,14 +1,12 @@
 package com.norg.cookbook.repository;
 
-import com.norg.cookbook.model.Ingredient;
+import com.norg.cookbook.entity.Ingredient;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.Collection;
 
 /**
  * Тесты репозитория ингредиента
