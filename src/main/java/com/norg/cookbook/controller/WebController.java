@@ -43,7 +43,7 @@ public class WebController {
         return "ingredients";
     }
 
-    @RequestMapping(value = "/addingredient", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_ingredient", method = RequestMethod.POST)
     public String addTask(@ModelAttribute("ingredient")Ingredient ingredient) {
         if(!"".equals(ingredient.getName()) || ingredient.getName() == null) {
             ingredientService.save(ingredient);
@@ -51,7 +51,7 @@ public class WebController {
         return "redirect:/ingredients";
     }
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping("/remove_ingredient/{id}")
     public String removeTask(@PathVariable("id") Integer id) {
         try{
             ingredientService.delete(id);
@@ -61,7 +61,7 @@ public class WebController {
         return "redirect:/ingredients";
     }
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/edit_ingredient/{id}")
     public String editTask(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("ingredient", ingredientService.findById(id));
         model.addAttribute("ingredients", ingredientService.list());

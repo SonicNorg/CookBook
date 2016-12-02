@@ -39,7 +39,7 @@
     <c:if test="${!(ingredient.id==null)}">
         <h2>Edit ingredient</h2>
     </c:if>
-    <c:url var="addAction" value="/addingredient"/>
+    <c:url var="addAction" value="/add_ingredient"/>
     <form:form action="${addAction}" commandName="ingredient">
         <form:hidden path="id"/>
         <br>
@@ -83,12 +83,12 @@
                     <td width="120px">
                         <table>
                             <tr>
-                                <td><form:form action="edit/${ingredient.id}" method="post"><input type="submit"
+                                <td><form:form action="edit_ingredient/${ingredient.id}" method="post"><input type="submit"
                                                                                                    size="XSmall"
                                                                                                    class="btn btn-info btn-mini"
                                                                                                    value="Edit..."/>
                                 </form:form></td>
-                                <td><form:form action="remove/${ingredient.id}" method="post"><input type="submit"
+                                <td><form:form action="remove_ingredient/${ingredient.id}" method="post"><input type="submit"
                                                                                                      size="XSmall"
                                                                                                      class="btn btn-danger btn-mini"
                                                                                                      value="Delete"/>
