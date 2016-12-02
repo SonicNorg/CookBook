@@ -1,9 +1,13 @@
 package com.norg.cookbook.controller;
 
+import com.norg.cookbook.entity.Ingredient;
 import com.norg.cookbook.service.IngredientService;
 import com.norg.cookbook.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -31,4 +35,41 @@ public class WebController {
     public String main() {
         return "main";
     }
+
+    @RequestMapping(value = "/ingredients", method = RequestMethod.GET)
+    public String listTasks(Model model) {
+        model.addAttribute("ingredient", new Ingredient());
+        model.addAttribute("ingredients", ingredientService.list());
+        return "ingredients";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addTask(@ModelAttribute("ingredient")Ingredient ingredient) {
+        ingredientService.save(ingredient);
+//        if (ingredient.getId() == null || ingredient.getId() == 0L) {
+//            ingredientService.save(ingredient);
+//        } else {
+//            ingredientService.save(ingredient);
+//        }
+        return "redirect:/ingredients";
+    }
+
+    @RequestMapping("/remove/{id}")
+    public String removeTask(@PathVariable("id") Integer id) {
+        try{
+            ingredientService.delete(id);
+        }catch (Exception e) {
+            return "cannotdelete";
+        }
+        return "redirect:/ingredients";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String editTask(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("ingredient", ingredientService.findById(id));
+        model.addAttribute("ingredients", ingredientService.list());
+
+        return "ingredients";
+    }
+
 }

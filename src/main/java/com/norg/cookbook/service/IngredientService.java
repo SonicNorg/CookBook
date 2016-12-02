@@ -38,7 +38,7 @@ public class IngredientService {
         ingredientRepository.delete(id);
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Transactional
     public List<Ingredient> list() {
         return new ArrayList<>((Collection<? extends Ingredient>) ingredientRepository.findAll());
     }
@@ -46,5 +46,10 @@ public class IngredientService {
     @Transactional
     public void clear() {
         ingredientRepository.deleteAll();
+    }
+
+    @Transactional
+    public Ingredient findById(Integer id) {
+        return ingredientRepository.findOne(id);
     }
 }

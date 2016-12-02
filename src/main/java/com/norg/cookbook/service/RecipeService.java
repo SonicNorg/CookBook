@@ -45,7 +45,7 @@ public class RecipeService {
         recipeRepository.delete(id);
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Transactional
     public List<Recipe> list() {
         return new ArrayList<>((Collection<? extends Recipe>) recipeRepository.findAll());
     }
