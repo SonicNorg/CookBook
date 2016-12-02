@@ -105,4 +105,11 @@ public class WebController {
         model.addAttribute("ingredients", ingredientService.list());
         return "redirect:/recipe";
     }
+
+    @RequestMapping(value = "/edit_recipe/{id}", method = RequestMethod.POST)
+    public String editRecipe(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("recipe", recipeService.findById(id));
+        model.addAttribute("ingredients", ingredientService.list());
+        return "recipe";
+    }
 }

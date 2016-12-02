@@ -8,3 +8,8 @@ Spring Web MVC + Hibernate + MySQL
 Вместо `DAO` использован интерфейс `CrudRepository<T, ID>`, что избавило от необходимости писать свою имплементацию.  
 Реализован один контроллер, содержащий все `RequestMapper`ы.  
 Веб-морда использует `Bootstrap` (чуть-чуть).
+![](screenshots/1-startpage.PNG)  
+![](screenshots/2-ingredients.PNG)  
+![](screenshots/3-edit_ingredient.PNG)  
+![](screenshots/4-recipes.PNG)  
+![](screenshots/5-edit_recipe.PNG)  

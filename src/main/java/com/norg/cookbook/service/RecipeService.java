@@ -54,4 +54,8 @@ public class RecipeService {
     public void clear() {
         recipeRepository.deleteAll();
     }
+
+    public Recipe findById(Integer id) {
+        return recipeRepository.findOne(id);
+    }
 }
