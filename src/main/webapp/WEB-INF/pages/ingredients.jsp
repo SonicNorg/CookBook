@@ -39,7 +39,7 @@
     <c:if test="${!(ingredient.id==null)}">
         <h2>Edit ingredient</h2>
     </c:if>
-    <c:url var="addAction" value="/add"/>
+    <c:url var="addAction" value="/addingredient"/>
     <form:form action="${addAction}" commandName="ingredient">
         <form:hidden path="id"/>
         <br>

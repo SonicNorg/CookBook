@@ -43,14 +43,11 @@ public class WebController {
         return "ingredients";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/addingredient", method = RequestMethod.POST)
     public String addTask(@ModelAttribute("ingredient")Ingredient ingredient) {
-        ingredientService.save(ingredient);
-//        if (ingredient.getId() == null || ingredient.getId() == 0L) {
-//            ingredientService.save(ingredient);
-//        } else {
-//            ingredientService.save(ingredient);
-//        }
+        if(!"".equals(ingredient.getName()) || ingredient.getName() == null) {
+            ingredientService.save(ingredient);
+        }
         return "redirect:/ingredients";
     }
 
