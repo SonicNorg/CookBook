@@ -1,6 +1,7 @@
 package com.norg.cookbook.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ public class Recipe {
     private Integer id;
     private String name;
     private String description;
-    private List<RecipeIngredient> ingredients;
+    private List<RecipeIngredient> ingredients = new ArrayList<>();
     //TODO date, author, etc.
 
     public Recipe() {

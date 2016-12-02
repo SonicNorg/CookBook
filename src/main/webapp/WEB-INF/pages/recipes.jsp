@@ -33,19 +33,9 @@
 <div class="container">
     <a href="/cookbook/">Back to Main</a> <br>
 
-    <c:url var="addAction" value="/add"/>
-    <form:form action="${addAction}" commandName="ingredient">
-        <form:hidden path="id"/>
-        <br>
-        <form:label path="name">Name:</form:label>
-        <form:input path="name" class="form-control" placeholder="Name"/>
-
-        <c:if test="${ingredient.id==null}">
-            <button type="submit" class="btn btn-success" size="Small">Add ingredient</button>
-        </c:if>
-        <c:if test="${!(ingredient.id==null)}">
-            <button type="submit" class="btn btn-warning" size="Small">Save ingredient</button>
-        </c:if>
+    <c:url var="addAction" value="/add_recipe"/>
+    <form:form action="${addAction}" commandName="recipe">
+        <button type="submit" class="btn btn-success" size="Small">Add recipe</button>
     </form:form>
 
     <h2>Recipes</h2>
@@ -54,38 +44,41 @@
         <button class="btn btn-primary dropdown-toggle" type="button" id="filter" data-toggle="dropdown">Filter
             <span class="caret"/></button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="filter">
-            <li role="presentation"><a role="menuitem" href="/">All</a></li>
+            <li role="presentation"><a role="menuitem" href="recipes">All</a></li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem" href="filter/used">Used</a></li>
-            <li role="presentation"><a role="menuitem" href="filter/unused">Unused</a></li>
+            <c:forEach items="${ingredients}" var="ingredient">
+                <li role="presentation"><a role="menuitem" href="recipes/filter/${ingredient.id}">${ingredient.name}</a></li>
+            </c:forEach>
         </ul>
     </div>
 
-    <c:if test="${!empty ingredients}">
+    <c:if test="${!empty recipes}">
 
         <table class="table table-bordered table-striped table-hover header-fixed">
             <thead>
             <tr>
-                <th>Name</th>
+                <th width="150px">Name</th>
+                <th width="250px">Description</th>
                 <th width="120px">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${ingredients}" var="ingredient">
+            <c:forEach items="${recipes}" var="recipe">
                 <tr>
-                    <td>${ingredient.name}</td>
+                    <td width="150px">${recipe.name}</td>
+                    <td width="200px">${recipe.description}</td>
                     <td width="120px">
                         <table>
                             <tr>
-                                <td><form:form action="edit/${ingredient.id}" method="post"><input type="submit"
-                                                                                                   size="XSmall"
-                                                                                                   class="btn btn-info btn-mini"
-                                                                                                   value="Edit..."/>
+                                <td><form:form action="edit_recipe/${recipe.id}" method="post"><input type="submit"
+                                                                                                      size="XSmall"
+                                                                                                      class="btn btn-info btn-mini"
+                                                                                                      value="Edit..."/>
                                 </form:form></td>
-                                <td><form:form action="remove/${ingredient.id}" method="post"><input type="submit"
-                                                                                                     size="XSmall"
-                                                                                                     class="btn btn-danger btn-mini"
-                                                                                                     value="Delete"/>
+                                <td><form:form action="remove_recipe/${recipe.id}" method="post"><input type="submit"
+                                                                                                        size="XSmall"
+                                                                                                        class="btn btn-danger btn-mini"
+                                                                                                        value="Delete"/>
                                 </form:form></td>
                             </tr>
                         </table>

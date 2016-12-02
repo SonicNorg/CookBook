@@ -60,10 +60,10 @@
         <button class="btn btn-primary dropdown-toggle" type="button" id="filter" data-toggle="dropdown">Filter
             <span class="caret"/></button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="filter">
-            <li role="presentation"><a role="menuitem" href="/">All</a></li>
+            <li role="presentation"><a role="menuitem" href="ingredients">All</a></li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem" href="filter/used">Used</a></li>
-            <li role="presentation"><a role="menuitem" href="filter/unused">Unused</a></li>
+            <li role="presentation"><a role="menuitem" href="ingredients/filter/used">Used</a></li>
+            <li role="presentation"><a role="menuitem" href="ingredients/filter/unused">Unused</a></li>
         </ul>
     </div>
 
@@ -72,14 +72,14 @@
         <table class="table table-bordered table-striped table-hover header-fixed">
             <thead>
             <tr>
-                <th>Name</th>
+                <th width="150px">Name</th>
                 <th width="120px">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${ingredients}" var="ingredient">
                 <tr>
-                    <td>${ingredient.name}</td>
+                    <td width="150px">${ingredient.name}</td>
                     <td width="120px">
                         <table>
                             <tr>
